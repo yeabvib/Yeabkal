@@ -1,7 +1,7 @@
 services:
   # The Web Service runs FastAPI and handles all incoming webhooks
   - type: web
-    name: teleludo-bot
+    name: Yeab game zone 
     env: python
     region: Frankfurt # Optional: choose a region close to you
     plan: free # Or your preferred plan
@@ -11,7 +11,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: teleludo-db
+          name: Yeab game zone-db
           property: connectionString
       - key: TELEGRAM_BOT_TOKEN
         sync: false # Set in Render dashboard
@@ -20,14 +20,14 @@ services:
       - key: WEBHOOK_URL
         fromService:
           type: web
-          name: teleludo-bot
+          name: Yeab game zone 
           property: url
       - key: BOT_OWNER_ID
         sync: false # Set your Telegram User ID for admin notifications
 
 # A PostgreSQL database managed by Render
 databases:
-  - name: teleludo-db
+  - name: Yeab game zone-db
     databaseName: teleludo_db
     user: teleludo_user
     plan: free # Or your preferred plan

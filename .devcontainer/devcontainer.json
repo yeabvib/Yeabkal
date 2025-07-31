@@ -1,0 +1,21 @@
+{
+  "name": "Yeab game zone",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/postgresql-nix:1": {}
+  },
+  "forwardPorts": [8000],
+  "postCreateCommand": "pip install --user -r requirements.txt && echo 'All set! Create a .env file from .env.example and start coding.'",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

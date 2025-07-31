@@ -1,7 +1,7 @@
 services:
   # The Web Service runs FastAPI and handles all incoming webhooks
   - type: web
-    name: Yeab game zone 
+    name: yeab-game-zone
     env: python
     region: Frankfurt # Optional: choose a region close to you
     plan: free # Or your preferred plan
@@ -11,23 +11,52 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: Yeab game zone-db
+          name: yeab-game-zone-db
           property: connectionString
       - key: TELEGRAM_BOT_TOKEN
-        sync: false # Set in Render dashboard
+        sync: false
       - key: CHAPA_API_KEY
-        sync: false # Set in Render dashboard
+        sync: false
       - key: WEBHOOK_URL
         fromService:
           type: web
-          name: Yeab game zone 
+          name: yeab-game-zone
           property: url
       - key: BOT_OWNER_ID
-        sync: false # Set your Telegram User ID for admin notifications
+        sync: false
 
 # A PostgreSQL database managed by Render
 databases:
-  - name: Yeab game zone-db
-    databaseName: teleludo_db
-    user: teleludo_user
-    plan: free # Or your preferred plan
+  - name: yeab-game-zone-db
+    databaseName: yeab_game_zone_db
+    user: yeab_game_zone_user
+    plan: free # Or your preferred plan```
+
+---
+
+### **3. `.devcontainer/devcontainer.json`**
+
+Updated for GitHub Codespaces.
+
+```json
+{
+  "name": "Yeab Game Zone",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/postgresql-nix:1": {}
+  },
+  "forwardPorts": [8000],
+  "postCreateCommand": "pip install --user -r requirements.txt && echo 'All set! Create a .env file from .env.example and start coding.'",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

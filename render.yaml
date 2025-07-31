@@ -1,17 +1,21 @@
 services:
   # The Web Service runs FastAPI and handles all incoming webhooks
   - type: web
-    name: yeab-game-zone
+    name: Yeabkal  # Matches your service name
     env: python
-    region: Frankfurt # Optional: choose a region close to you
-    plan: free # Or your preferred plan
-    buildCommand: "apt-get update && apt-get install -y build-essential libpq-dev && pip install -r requirements.txt && alembic upgrade head"
+    region: Frankfurt
+    plan: free
+    #
+    # THIS IS THE COMMAND YOU ARE CHANGING:
+    #
+    buildCommand: "apt-get update && apt-get install -y build-essential libpq-dev && pip install -r requirements.txt"
+    #
     startCommand: "gunicorn -w 4 -k uvicorn.workers.UvicornWorker api.main:app"
     healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: yeab-game-zone-db
+          name: yeab-game-zone-db # Make sure this is the name of your DB service on Render
           property: connectionString
       - key: TELEGRAM_BOT_TOKEN
         sync: false
@@ -20,14 +24,14 @@ services:
       - key: WEBHOOK_URL
         fromService:
           type: web
-          name: yeab-game-zone
+          name: Yeabkal # Must match the service name above
           property: url
       - key: BOT_OWNER_ID
         sync: false
 
 # A PostgreSQL database managed by Render
 databases:
-  - name: yeab-game-zone-db
+  - name: yeab-game-zone-db # Make sure this matches the name used above
     databaseName: yeab_game_zone_db
     user: yeab_game_zone_user
-    plan: free # Or your preferred plan```
+    plan: free

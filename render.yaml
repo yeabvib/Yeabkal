@@ -29,4 +29,6 @@ databases:
   - name: yeab-game-zone-db # Make sure this matches the name used above
     databaseName: yeab_game_zone_db
     user: yeab_game_zone_user
-    plan: free
+    plan: freegit add render.yaml
+git commit -m "Fix: Add system dependencies for asyncpg build"
+git push

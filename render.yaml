@@ -1,4 +1,4 @@
-services:
+apt-get update && apt-get install -y build-essential libpq-devservices:
   - type: web
     name: Yeabkal
     env: python
